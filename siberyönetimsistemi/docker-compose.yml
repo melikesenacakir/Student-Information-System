@@ -1,0 +1,24 @@
+version: '3'
+services:
+  www:
+    build: .
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - "80:80"
+    depends_on:
+       - db
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: obs
+      MYSQL_ROOT_PASSWORD: '1'
+    volumes:
+      - mydb:/var/lib/mysql
+      - "./obs.sql:/docker-entrypoint-initdb.d/obs.sql"
+    ports:
+      - "8080:3306"
+
+volumes:
+   mydb:
