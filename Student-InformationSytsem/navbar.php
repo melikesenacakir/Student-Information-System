@@ -15,7 +15,7 @@ if($_SESSION['rol']=='Admin'){
                 <a class="nav-link active" aria-current="page" href="anasayfa.php">Anasayfa</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="öğrenci-ekle-guncelle-goruntule.php">Yeni öğrenci ekle</a>
+                <a class="nav-link " aria-current="page" href="ogrenci-ekle-guncelle-goruntule.php">Yeni öğrenci ekle</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " aria-current="page" href="sorumlu-ekle-guncelle-goruntule.php">Yeni öğretmen ekle</a>

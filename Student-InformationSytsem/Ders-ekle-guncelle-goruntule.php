@@ -59,16 +59,19 @@ include 'sessioncontrol.php';
             $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
             $sql = "SELECT name,id FROM t_users WHERE role='Öğretmen' and id!=?";
             $getir = $db->prepare($sql);
-            $getir->execute([$_GET['sorumlu']]);
+            $getir->execute([htmlspecialchars($_GET['sorumlu'])]);
             $sonuc = $getir->fetchAll(PDO::FETCH_ASSOC);
+            $lessoninfo=htmlspecialchars($_GET['ders_bilgi']);
+            $teacher=htmlspecialchars($_GET['sorumlu']);
+            $name=htmlspecialchars($_GET['isim']);
 
             echo "<div class='form-floating mb-3 col-md-6'>
-                    <input type='text' class='form-control form-control-lg bg-gradient' name='ders' placeholder='ders' value='{$_GET['ders_bilgi']}'>
+                    <input type='text' class='form-control form-control-lg bg-gradient' name='ders' placeholder='ders' value='{$lessoninfo}'>
                     <label for='text'>Ders</label>
                 </div>
                 <div class='form-floating mb-3 col-md-6'>";
             echo '<select class="form-select p-2" name="öğretmen">';
-            echo "<option value='{$_GET['sorumlu']}' selected>{$_GET['isim']}</option>";
+            echo "<option value='{$teacher}' selected>{$name}</option>";
             foreach ($sonuc as $s) {
                 echo "<option value='{$s['id']}'>{$s['name']}</option>";
             }
@@ -86,7 +89,7 @@ include 'sessioncontrol.php';
             $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
                 $sql = "UPDATE t_lessons JOIN t_users ON t_lessons.teacher_user_id = t_users.id SET t_lessons.teacher_user_id=?,t_lessons.lesson_name=? WHERE t_lessons.teacher_user_id=? and t_lessons.lesson_name=? and t_lessons.id=?";
                 $sonuc = $db->prepare($sql);
-                $sonuc->execute([$tid, $ders, $_GET['sorumlu'], $_GET['ders_bilgi'], $_GET['id']]);
+                $sonuc->execute([$tid, $ders,htmlspecialchars($_GET['sorumlu']),htmlspecialchars( $_GET['ders_bilgi']),htmlspecialchars( $_GET['id'])]);
                 echo "<script>Swal.fire({
                                 text: 'Ders başarıyla guncellenmiştir',
                                 icon: 'success',
@@ -99,9 +102,10 @@ include 'sessioncontrol.php';
         $getir = $db->prepare($sql);
         $getir->execute();
         $sonuc = $getir->fetchAll(PDO::FETCH_ASSOC);
-
+       
+         $lesson=htmlspecialchars($_GET['sorumlusu_olmayan_ders']);
         echo "<div class='form-floating mb-3 col-md-6'>
-                    <input type='text' class='form-control form-control-lg bg-gradient' name='ders' placeholder='ders' value='{$_GET['sorumlusu_olmayan_ders']}'>
+                    <input type='text' class='form-control form-control-lg bg-gradient' name='ders' placeholder='ders' value='{$lesson}'>
                     <label for='text'>Ders</label>
                 </div>
                 <div class='form-floating mb-3 col-md-6'>";

@@ -106,7 +106,7 @@ include 'sessioncontrol.php';
                               <td>{$i['surname']}</td>
                               <td>{$i['class_name']}</td>
                               <td>{$skor}</td>
-                              <td class='form-floating'><button class='btn btn-outline-primary rounded-5 '><a href='öğrenci-ekle-guncelle-goruntule.php?ad={$i['name']}&soyad={$i['surname']}&kullaniciadi={$i['username']}&sifre={$i['password']}' class='text-decoration-none text-white'>Öğrenci Düzenle</a></button><button class='btn btn-outline-danger rounded-5 mx-2'><a href='ogrencisil.php?id={$i['id']}' class='text-decoration-none text-white'>Öğrenci Sil</a></button><button class='btn btn-outline-info rounded-5'><a href='ayrinti.php?ad={$i['name']}&soyad={$i['surname']}&sinif={$i['class_name']}&id={$i['id']}' class='text-decoration-none text-white'>Ayrıntılı Görüntüle</a></button></td>
+                              <td class='form-floating'><button class='btn btn-outline-primary rounded-5 '><a href='ogrenci-ekle-guncelle-goruntule.php?ad={$i['name']}&soyad={$i['surname']}&kullaniciadi={$i['username']}&sifre={$i['password']}' class='text-decoration-none text-white'>Öğrenci Düzenle</a></button><button class='btn btn-outline-danger rounded-5 mx-2'><a href='ogrencisil.php?id={$i['id']}' class='text-decoration-none text-white'>Öğrenci Sil</a></button><button class='btn btn-outline-info rounded-5'><a href='ayrinti.php?ad={$i['name']}&soyad={$i['surname']}&sinif={$i['class_name']}&id={$i['id']}' class='text-decoration-none text-white'>Ayrıntılı Görüntüle</a></button></td>
                             </tr>
                           </tbody>";
                     }

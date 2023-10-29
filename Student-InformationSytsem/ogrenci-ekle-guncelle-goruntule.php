@@ -42,15 +42,15 @@ include 'sessioncontrol.php';
         <?php
         include "navbar.php";
         ?>
-<div class="container vh-100 d-flex justify-content-center align-items-center">
-    <img src="Resimler/yavuzlar.png" class=" arkaplan">
-    <div class="row">
-        <div class=" p-5 rounded-5 bg-light">
-            <?php
-            try{
-                if(!isset($_GET['name'])) {
-                    echo " <form action='#' method='post'>
-                    <h3 class=' text-center mt-3'>Sorumlu ekleme</h3>
+        <div class="container vh-100 d-flex justify-content-center align-items-center">
+            <img src="Resimler/yavuzlar.png" class=" arkaplan">
+            <div class="row">
+                <div class=" p-5 rounded-5 bg-light">
+                    <?php
+                    try{
+                        if(!isset($_GET['ad'])) {
+                            echo " <form action='#' method='post'>
+                    <h3 class=' text-center mt-3'>Öğrenci ekleme</h3>
                 <div class='row g-3'>
                     <div class='form-floating mb-3 col-md-6'>
                         <input type='text' class='form-control form-control-lg bg-gradient' name='ad' placeholder='Ad' >
@@ -73,43 +73,47 @@ include 'sessioncontrol.php';
                 </div>
                 </div>
             </form>";
-                    if (isset($_POST['password'])) {
-                        $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
-                        $sql = "INSERT INTO t_users(name,surname,username,password,role,created_at) VALUES (?,?,?,?,?,current_timestamp());";
-                        $sonuc = $db->prepare($sql);
-                        $sifre = $_POST['password'];
-                        $kadi = $_POST['kullaniciadi'];
-                        $ad = $_POST['ad'];
-                        $soyad = $_POST['soyad'];
-                        $rol = 'Öğretmen';
-                        $hash = password_hash($sifre, PASSWORD_ARGON2ID);
-                        $ekle = $sonuc->execute([$ad, $soyad, $kadi, $hash, $rol]);
-                        echo "<script>Swal.fire({
-                                text: 'Yeni sorumlu başarıyla eklenmiştir',
+                            if (isset($_POST['password'])) {
+                                $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
+                                $sql = "INSERT INTO t_users(name,surname,username,password,role,created_at) VALUES (?,?,?,?,?,current_timestamp());";
+                                $sonuc = $db->prepare($sql);
+                                $sifre = $_POST['password'];
+                                $kadi = $_POST['kullaniciadi'];
+                                $ad = $_POST['ad'];
+                                $soyad = $_POST['soyad'];
+                                $rol = 'Öğrenci';
+                                $hash = password_hash($sifre, PASSWORD_ARGON2ID);
+                                $ekle = $sonuc->execute([$ad, $soyad, $kadi, $hash, $rol]);
+                                echo "<script>Swal.fire({
+                                text: 'Yeni öğrenci başarıyla eklenmiştir',
                                 icon: 'success',
                                 confirmButtonText: 'Tamam'
                             });</script>";
-                    }
-                }else{
-                    $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
+                            }
+                        }else{
+                            $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
+                            $name=htmlspecialchars($_GET['ad']);
+                            $surname=htmlspecialchars($_GET['soyad']);
+                            $username=htmlspecialchars($_GET['kullaniciadi']);
+                            $pass=htmlspecialchars($_GET['sifre']);
 
-                    echo " <form action='#' method='post'>
-                    <h3 class=' text-center mt-3'>Sorumlu Güncelleme</h3>
+                            echo " <form action='#' method='post'>
+                    <h3 class=' text-center mt-3'>Öğrenci Güncelleme</h3>
                 <div class='row g-3'>
                     <div class='form-floating mb-3 col-md-6'>
-                        <input type='text' class='form-control form-control-lg bg-gradient' name='ad' placeholder='Ad' value='{$_GET['name']}'>
+                        <input type='text' class='form-control form-control-lg bg-gradient' name='ad' placeholder='Ad' value='{$name}'>
                         <label for='text'>Ad</label>
                     </div>
                     <div class='form-floating mb-3 col-md-6'>
-                        <input type='text' class='form-control form-control-lg bg-gradient' name='soyad' placeholder='Soyad' value='{$_GET['surname']}'>
+                        <input type='text' class='form-control form-control-lg bg-gradient' name='soyad' placeholder='Soyad' value='{$surname}'>
                         <label for='text'>Soyad</label>
                     </div>
                     <div class='form-floating mb-3 col-md-6'>
-                        <input type='text' class='form-control form-control-lg bg-gradient' name='kadi' placeholder='Kullanıcı Adınız' value='{$_GET['username']}'>
+                        <input type='text' class='form-control form-control-lg bg-gradient' name='kadi' placeholder='Kullanıcı Adınız' value='{$username}'>
                         <label for='text'>Kullanıcı Adı</label>
                     </div>
                     <div class='form-floating mb-3 col-md-6'>
-                        <input type='password' class='form-control form-control-lg bg-gradient' id='password' name='sifre' placeholder='Şifreniz' value='{$_GET['password']}'>
+                        <input type='password' class='form-control form-control-lg bg-gradient' id='password' name='sifre' placeholder='Şifreniz' value='{$pass}'>
                         <label for='Password'>Şifre</label>
                     </div>
                     <div class='d-grid gap-3 form-floating'>
@@ -117,34 +121,34 @@ include 'sessioncontrol.php';
                 </div>
                 </div>
             </form>";
-                    if (isset($_POST['ad'])) {
-                        $sifre = $_POST['sifre'];
-                        $kadi = $_POST['kadi'];
-                        $ad = $_POST['ad'];
-                        $soyad = $_POST['soyad'];
+                            if (isset($_POST['ad'])) {
+                                $sifre = $_POST['sifre'];
+                                $kadi = $_POST['kadi'];
+                                $ad = $_POST['ad'];
+                                $soyad = $_POST['soyad'];
 
-                        $sql = "UPDATE t_users SET name=?,surname=?,username=?,password=? WHERE name=? and surname=? and username=? and password=?;";
-                        $sonuc = $db->prepare($sql);
-                        $hash = password_hash($sifre, PASSWORD_ARGON2ID);
-                        $sonuc->execute([$ad, $soyad, $kadi, $hash,$_GET['name'],$_GET['surname'],$_GET['username'],$_GET['password']]);
-                        echo "<script>Swal.fire({
-                                text: 'sorumlu başarıyla güncellenmiştir',
+                                $sql = "UPDATE t_users SET name=?,surname=?,username=?,password=? WHERE name=? and surname=? and username=? and password=?;";
+                                $sonuc = $db->prepare($sql);
+                                $hash = password_hash($sifre, PASSWORD_ARGON2ID);
+                                $sonuc->execute([$ad, $soyad, $kadi, $hash,htmlspecialchars($_GET['ad']),htmlspecialchars($_GET['soyad']),htmlspecialchars($_GET['kullaniciadi']),htmlspecialchars($_GET['sifre'])]);
+                                echo "<script>Swal.fire({
+                                text: 'öğrenci başarıyla güncellenmiştir',
                                 icon: 'success',
                                 confirmButtonText: 'Tamam'
                             });</script>";
-                    }
-                }
-            }catch(Exception $e) {
-                echo "<script>Swal.fire({
+                            }
+                        }
+                    }catch(Exception $e) {
+                        echo "<script>Swal.fire({
                                 text: 'kullanıcı adı kullanılmakta',
                                 icon: 'error',
                                 confirmButtonText: 'Tamam'
                             });</script>";
-            }
-            ?>
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
         <footer class="container-fluid clearfix text-light">
             <hr>
             <div class=" text-center mt-4 mb-3">

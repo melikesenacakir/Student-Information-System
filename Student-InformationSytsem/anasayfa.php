@@ -48,7 +48,7 @@ include 'sessioncontrol.php';
     <img src="Resimler/yavuzlar.png" class=" arkaplan">
     <div class="row">
     <div class="card col-md-4 mx-3" style="width: 18rem;">
-        <img class="card-img-top" src="Resimler/öğretmen.png" alt="Card image cap">
+        <img class="card-img-top" src="Resimler/ogretmen.png" alt="Card image cap">
         <div class="card-body">
             <p class="card-text">
                 <?php
@@ -62,7 +62,7 @@ include 'sessioncontrol.php';
         </div>
     </div>
     <div class="card col-md-4 mx-3" style="width: 18rem;">
-        <img class="card-img-top" src="Resimler/öğrenci.png" alt="Card image cap">
+        <img class="card-img-top" src="Resimler/ogrenci.png" alt="Card image cap">
         <div class="card-body">
             <p class="card-text">
                 <?php
@@ -100,7 +100,7 @@ if($_SESSION['rol']=='Öğretmen'){
     <img src="Resimler/yavuzlar.png" class=" arkaplan">
     <div class="row">
         <div class="card col-md-4 mx-3" style="width: 18rem;">
-            <img class="card-img-top" src="Resimler/sınıf.png" alt="Card image cap">
+            <img class="card-img-top" src="Resimler/sinif.png" alt="Card image cap">
             <div class="card-body">
                 <p class="card-text">
                     <?php
@@ -180,7 +180,7 @@ if($_SESSION['rol']=='Öğrenci'){
     <img src="Resimler/yavuzlar.png" class=" arkaplan">
     <div class="row">
         <div class="card col-md-4 mx-3" style="width: 18rem;">
-            <img class="card-img-top" src="Resimler/sınıf.png" alt="Card image cap">
+            <img class="card-img-top" src="Resimler/sinif.png" alt="Card image cap">
             <div class="card-body">
                 <p class="card-text">
                     <?php

@@ -89,30 +89,33 @@ include 'sessioncontrol.php';
                             if (isset($_GET['id'])) {
                                 $sql = "SELECT * FROM t_users WHERE id!=? and role=?";
                                 $getir = $db->prepare($sql);
-                                $getir->execute([$_GET['id'], 'Öğretmen']);
+                                $getir->execute([htmlspecialchars($_GET['id']), 'Öğretmen']);
                                 $sonuc = $getir->fetchAll(PDO::FETCH_ASSOC);
 
                                 $sql = "SELECT class_name FROM t_classes WHERE class_name!=?";
                                 $getir = $db->prepare($sql);
-                                $getir->execute([$_GET['sinifad']]);
+                                $getir->execute([htmlspecialchars($_GET['sinifad'])]);
                                 $ogretmen = $getir->fetchAll(PDO::FETCH_ASSOC);
+                                $Sinifad=htmlspecialchars($_GET['sinifad']);
 
                                 echo "<h3 class=' text-center mt-3 mb-3'>Sınıf Güncelleme</h3>
                                     <div class='row g-3'><div class='form-floating mb-3 col-md-6'>
                                 <select class='form-select' name='yenisınıf'>
-                                 <option value='{$_GET['sinifad']}' selected> 2023 {$_GET['sinifad']}</option>";
+                                 <option value='{ $Sinifad}' selected> 2023 { $Sinifad}</option>";
                                 foreach ($ogretmen as $o) {
                                     echo "<option value='{$o['class_name']}'> 2023 {$o['class_name']}</option>";
                                 }
+                                $idsi=htmlspecialchars($_GET['id']);
+                                $adi=htmlspecialchars($_GET['ad']);
                                 echo "</select>
                             </div>
                             <div class='form-floating mb-3 col-md-6'>";
                                 echo '<select class="form-select" name="yeniogretmen">';
-                                echo "<option value='{$_GET['id']}' selected>{$_GET['ad']}</option>";
+                                echo "<option value='{$idsi}' selected>{$adi}</option>";
                                 foreach ($sonuc as $i) {
                                     $sql = "SELECT * FROM t_classes WHERE class_teacher_id!=?";
                                     $getir = $db->prepare($sql);
-                                    $getir->execute([$_GET['id']]);
+                                    $getir->execute([htmlspecialchars($_GET['id'])]);
                                     $ogretmen = $getir->fetchAll(PDO::FETCH_ASSOC);
                                     $id = $i['id'];
                                     $name = $i['name'];
@@ -128,13 +131,15 @@ include 'sessioncontrol.php';
 
                                 $sql = "SELECT class_name FROM t_classes WHERE class_name!=?";
                                 $getir = $db->prepare($sql);
-                                $getir->execute([$_GET['sinifad']]);
+                                $getir->execute([htmlspecialchars($_GET['sinifad'])]);
                                 $ogretmen = $getir->fetchAll(PDO::FETCH_ASSOC);
+                                $idsi=htmlspecialchars($_GET['id']);
+                                $adi=htmlspecialchars($_GET['sinifad']);
 
                                 echo "<h3 class=' text-center mt-3 mb-3'>Sınıf Güncelleme</h3>
                                     <div class='row g-3'><div class='form-floating mb-3 col-md-6'>
                                 <select class='form-select' name='yenisınıf'>
-                                 <option value='{$_GET['sinifad']}' selected> 2023 {$_GET['sinifad']}</option>";
+                                 <option value='{$idsi}' selected> 2023 {$adi}</option>";
                                 foreach ($ogretmen as $o) {
                                     echo "<option value='{$o['class_name']}'> 2023 {$o['class_name']}</option>";
                                 }
@@ -198,7 +203,7 @@ include 'sessioncontrol.php';
                                 $surname = $i['surname'];
                                 $sql = "SELECT * FROM t_classes_students WHERE ? = student_id and class_id=?";
                                 $getir = $db->prepare($sql);
-                                $getir->execute([$i['id'],$_GET['sinifid']]);
+                                $getir->execute([$i['id'],htmlspecialchars($_GET['sinifid'])]);
                                 $cevap = $getir->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -315,7 +320,7 @@ include 'sessioncontrol.php';
             if (isset($_GET['id'])) {
                 $sql = "UPDATE t_classes JOIN t_users ON t_classes.class_teacher_id = t_users.id SET t_classes.class_teacher_id=?,t_classes.class_name=? WHERE t_classes.class_teacher_id=? and t_classes.class_name=?";
                 $sonuc = $db->prepare($sql);
-                $ekle = $sonuc->execute([$_POST['yeniogretmen'], $_POST['yenisınıf'], $_GET['id'], $_GET['sinifad']]);
+                $ekle = $sonuc->execute([$_POST['yeniogretmen'], $_POST['yenisınıf'], htmlspecialchars($_GET['id']),htmlspecialchars( $_GET['sinifad'])]);
                 $ogrenciler=$_POST['ogrenci'];
 
                 $ilksql = "SELECT * FROM t_classes WHERE class_name=?";
@@ -345,7 +350,7 @@ include 'sessioncontrol.php';
             }else{
                 $sql = "UPDATE t_classes SET class_teacher_id=?,class_name=? WHERE class_teacher_id IS NULL and class_name=?";
                 $sonuc = $db->prepare($sql);
-                $ekle = $sonuc->execute([$_POST['yeniogretmen'], $_POST['yenisınıf'], $_GET['sinifad']]);
+                $ekle = $sonuc->execute([$_POST['yeniogretmen'], $_POST['yenisınıf'],htmlspecialchars( $_GET['sinifad'])]);
                 echo "<script>Swal.fire({
                                 text: 'Sınıf başarıyla güncellenmiştir',
                                 icon: 'success',

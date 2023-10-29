@@ -65,29 +65,38 @@ include 'sessioncontrol.php';
                                             }
                                             echo "</select>";
                                             echo '</div>';
+                                            $dersid=htmlspecialchars($_GET['dersid']);
+                                            $dersadi=htmlspecialchars($_GET['dersadi']);
+                                            $classname=htmlspecialchars($_GET['sinifadi']);
+                                            $classN=htmlspecialchars($_GET['sinif']);
+                                            $ogrid=htmlspecialchars($_GET['ogrid']);
+                                            $namee=htmlspecialchars($_GET['isim']);
+                                            $surnamee=htmlspecialchars($_GET['soyad']);
+                                            $datee=htmlspecialchars($_GET['tarih']);
+                                            $exam=htmlspecialchars($_GET['sinav']);
                                             echo '<div class="form-floating mb-3 col-md-6">
                                                     <input type="datetime-local" class="form-control form-control-lg bg-gradient" name="tarih" placeholder="Tarih ve saatini giriniz" >
                                                     <label for="datetime-local">Tarih ve saatini giriniz</label>
                                                 </div>';
                                         }else{
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$_GET['dersid']}' value='{$_GET['dersadi']}' disabled>
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$dersid}' value='{$dersadi}' disabled>
                                                   <label for='text'>Ders</label>
                                                   </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$_GET['sinifid']}' value='{$_GET['sinif']}' disabled>
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$classname}' value='{$classN}' disabled>
                                                     <label for='text'>Sınıf</label>
                                                   </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$_GET['ogrid']}' value='{$_GET['isim']} {$_GET['soyad']}' disabled>
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$ogrid}' value='{$namee} {$surnamee}' disabled>
                                                      <label for='text'>Ad Soyad</label>
                                                   </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='datetime-local' class='form-control form-control-lg bg-gradient rounded-5' name='yenitarih' value='{$_GET['tarih']}' placeholder='Tarih ve saatini giriniz' >
+                                                    <input type='datetime-local' class='form-control form-control-lg bg-gradient rounded-5' name='yenitarih' value='{$datee}' placeholder='Tarih ve saatini giriniz' >
                                                     <label for='datetime-local'>Tarih ve saatini giriniz</label>
                                                 </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='yeninot' placeholder='ders' value='{$_GET['sinav']}' >
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='yeninot' placeholder='ders' value='{$exam}' >
                                                     <label for='text'>Ders</label>
                                                 </div>";
                                         }
@@ -112,24 +121,34 @@ include 'sessioncontrol.php';
                                                     <label for="datetime-local">Tarih ve saatini giriniz</label>
                                                 </div>';
                                         }else{
+                                            $dersid=htmlspecialchars($_GET['dersid']);
+                                            $dersadi=htmlspecialchars($_GET['dersadi']);
+                                            $classname=htmlspecialchars($_GET['sinifid']);
+                                            $classN=htmlspecialchars($_GET['sinif']);
+                                            $ogrid=htmlspecialchars($_GET['ogrid']);
+                                            $namee=htmlspecialchars($_GET['isim']);
+                                            $surnamee=htmlspecialchars($_GET['soyad']);
+                                            $datee=htmlspecialchars($_GET['tarih']);
+                                            $exam=htmlspecialchars($_GET['sinav']);
+
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$_GET['dersid']}' value='{$_GET['dersadi']}' disabled>
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$dersid}' value='{$dersadi}' disabled>
                                                   <label for='text'>Ders</label>
                                                   </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$_GET['sinifid']}' value='{$_GET['sinif']}' disabled>
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$classname}' value='{$classN}' disabled>
                                                     <label for='text'>Sınıf</label>
                                                   </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$_GET['ogrid']}' value='{$_GET['isim']} {$_GET['soyad']}' disabled>
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='{$ogrid}' value='{$namee} {$surname}' disabled>
                                                      <label for='text'>Ad Soyad</label>
                                                   </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='datetime-local' class='form-control form-control-lg bg-gradient rounded-5' name='yenitarih' value='{$_GET['tarih']}' placeholder='Tarih ve saatini giriniz' >
+                                                    <input type='datetime-local' class='form-control form-control-lg bg-gradient rounded-5' name='yenitarih' value='{$datee}' placeholder='Tarih ve saatini giriniz' >
                                                     <label for='datetime-local'>Tarih ve saatini giriniz</label>
                                                 </div>";
                                             echo "<div class='form-floating mb-3 col-md-6'>
-                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='yeninot' placeholder='ders' value='{$_GET['sinav']}' >
+                                                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5 text-center' name='yeninot' placeholder='ders' value='{$exam}' >
                                                     <label for='text'>Ders</label>
                                                 </div>";
                                         }
@@ -180,7 +199,7 @@ include 'sessioncontrol.php';
                         $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
                         $sql = "UPDATE t_exams JOIN t_users ON t_exams.student_id = ? and t_exams.lesson_id=? SET t_exams.exam_date=?, t_exams.exam_score=? WHERE t_exams.exam_date=? and t_exams.exam_score=?";
                         $sonuc = $db->prepare($sql);
-                        $ekle = $sonuc->execute([$_GET['ogrid'],$_GET['dersid'],$_POST['yenitarih'],$_POST['yeninot'],$_GET['tarih'],$_GET['sinav']]);
+                        $ekle = $sonuc->execute([htmlspecialchars($_GET['ogrid']),htmlspecialchars($_GET['dersid']),$_POST['yenitarih'],$_POST['yeninot'],htmlspecialchars($_GET['tarih']),htmlspecialchars($_GET['sinav'])]);
                         echo "<script>Swal.fire({
                                 text: 'Sınav Güncellenmiştir',
                                 icon: 'success',
@@ -226,7 +245,7 @@ include 'sessioncontrol.php';
                         $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
                             $sql = "UPDATE t_exams JOIN t_users ON t_exams.student_id = ? and t_exams.lesson_id=? SET t_exams.exam_date=?, t_exams.exam_score=? WHERE t_exams.exam_date=? and t_exams.exam_score=?";
                             $sonuc = $db->prepare($sql);
-                            $ekle = $sonuc->execute([$_GET['ogrid'],$_GET['dersid'],$_POST['yenitarih'],$_POST['yeninot'],$_GET['tarih'],$_GET['sinav']]);
+                            $ekle = $sonuc->execute([htmlspecialchars($_GET['ogrid']),htmlspecialchars($_GET['dersid']),$_POST['yenitarih'],$_POST['yeninot'],htmlspecialchars($_GET['tarih']),htmlspecialchars($_GET['sinav'])]);
                             echo "<script>Swal.fire({
                                 text: 'Sınav Güncellenmiştir',
                                 icon: 'success',

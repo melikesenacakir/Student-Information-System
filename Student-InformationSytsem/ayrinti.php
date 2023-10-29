@@ -47,16 +47,19 @@ include 'sessioncontrol.php';
             <div class="row">
                 <h3 class="text-success">Öğrenci Bilgileri</h3>
                 <?php
+                $name=htmlspecialchars($_GET['ad']);
+                $surname=htmlspecialchars($_GET['soyad']);
+                $class=htmlspecialchars($_GET['sinif']);    
                 echo "<div class='form-floating mb-3 col-md-6'>
-                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5' name='isim' value='{$_GET['ad']}' disabled>
+                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5' name='isim' value='{$name}' disabled>
                     <label for='text'>İsim</label>
                 </div>";
                 echo "<div class='form-floating mb-3 col-md-6'>
-                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5' name='soyisim' value='{$_GET['soyad']}' disabled>
+                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5' name='soyisim' value='{$surname}' disabled>
                     <label for='text'>Soyisim</label>
                 </div>";
                 echo "<div class='form-floating mb-3 col-md-6'>
-                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5' name='sinif' value='{$_GET['sinif']}' disabled>
+                    <input type='text' class='form-control form-control-lg bg-gradient rounded-5' name='sinif' value='{$class}' disabled>
                     <label for='text'>Sınıf</label>
                 </div>";
                 ?>
@@ -65,13 +68,13 @@ include 'sessioncontrol.php';
                 $db = new PDO("mysql:host=db;dbname=obs", "root", "1");
                 $sql = "SELECT t_exams.exam_score,t_lessons.lesson_name,t_exams.exam_date,t_lessons.id FROM t_exams INNER JOIN t_lessons ON t_lessons.id=t_exams.lesson_id and t_exams.student_id=? ORDER BY t_lessons.lesson_name";
                 $getir = $db->prepare($sql);
-                $getir->execute([$_GET['id']]);
+                $getir->execute([htmlspecialchars($_GET['id'])]);
                 $sonuc = $getir->fetchAll(PDO::FETCH_ASSOC);
                 $ort=0;
                 $sonort=0;
                 foreach ($sonuc as $i) {
                     $getir = $db->prepare("SELECT COUNT(*) as sayac FROM t_exams WHERE lesson_id=? and student_id=?");
-                    $getir->execute([$i['id'],$_GET['id']]);
+                    $getir->execute([$i['id'],htmlspecialchars($_GET['id'])]);
                     $sinavsayi = $getir->fetch(PDO::FETCH_ASSOC);
                     foreach ($sonuc as $a){
                         if($i['lesson_name']==$a['lesson_name']){
